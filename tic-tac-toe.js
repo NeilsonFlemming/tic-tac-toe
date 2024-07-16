@@ -2,7 +2,7 @@ console.log('Tic Tac Toe');
 
 //state of the game
 
-let turn, board;
+let turn, board, winner;
 
 
 /* ------- Game Logic -------*/
@@ -15,6 +15,7 @@ function init() {
        ' ' ,' ' ,' ',
        ' ' ,' ' ,' '
     ];
+    winner = null;
     render()
 }
 
@@ -24,11 +25,18 @@ function render(){
 }
 
 function renderBoard() {
-    console.log(' 1 |2| 3');
-    console.log(`1 ${board[0]}|${board[1]}|${board[2]}`);
+    console.log(`  ${board[0]}|${board[1]}|${board[2]}`);
     console.log(' --|-|--');
-    console.log(`2 ${board[3]}|${board[4]}|${board[5]}`);
+    console.log(`  ${board[3]}|${board[4]}|${board[5]}`);
     console.log(' --|-|--');
-    console.log(`3 ${board[6]}|${board[7]}|${board[8]}`);
+    console.log(`  ${board[6]}|${board[7]}|${board[8]}`);
 
 }
+
+function gamePlay() {
+    while(!winner){
+        console.log(`Select `)
+    }
+}
+
+
