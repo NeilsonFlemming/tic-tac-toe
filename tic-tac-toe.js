@@ -14,7 +14,6 @@ function init() {
   turn = "X";
   board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
   winner = null;
-  render();
 }
 
 function render() {
@@ -37,7 +36,7 @@ function playMaker(playerMove) {
     console.log("Invlaid move, please select another.");
   else {
     board[playerMove] = turn;
-    turn === "X" ? (turn = "O") : (turn = "X");
+    (turn === "X") ? (turn = "O") : (turn = "X");
   }
 }
 
@@ -47,16 +46,17 @@ function winnerWinnerChickenDinner(){
             winner = board[combo[0]]
          }
     }
+    if (winner) console.log(`We have a winner! ${winner} has won the game`);
 }
 
 function gamePlay() {
   while (!winner) {
+    render();
     const playerMove = prompt(
       `${turn} It's your move, please select a space : `
     ).toUpperCase();
-    if (playerMove === "EXIT") break;
+    if (playerMove === "EXIT") return;
     playMaker(playerMove);
     winnerWinnerChickenDinner();
-    render();
   }
 }
