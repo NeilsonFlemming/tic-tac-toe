@@ -4,7 +4,16 @@ const prompt = require("prompt-sync")();
 //state of the game
 
 let turn, board, winner;
-const winningCombos = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+const winningCombos = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
 
 /* ------- Game Logic -------*/
 init();
@@ -32,21 +41,32 @@ function renderBoard() {
 function playMaker(playerMove) {
   if (board[playerMove] === "X" || board[playerMove] === "O")
     console.log("That space is taken, please select another.");
-  else if (playerMove > 7 || playerMove < 0 )
+  else if (playerMove > 8 || playerMove < 0)
     console.log("Invlaid move, please select another.");
   else {
     board[playerMove] = turn;
-    (turn === "X") ? (turn = "O") : (turn = "X");
+    turn === "X" ? (turn = "O") : (turn = "X");
   }
 }
 
-function winnerWinnerChickenDinner(){
-    for (const combo of winningCombos){
-         if(board[combo[0]] === board[combo[1]] && board[combo[1]] === board[combo[2]]){
-            winner = board[combo[0]]
-         }
+function winnerWinnerChickenDinner() {
+  for (const combo of winningCombos) {
+    if (
+      board[combo[0]] === board[combo[1]] &&
+      board[combo[1]] === board[combo[2]]
+    ) {
+      winner = board[combo[0]];
     }
-    if (winner) console.log(`We have a winner! ${winner} has won the game`);
+  }
+  if (winner) console.log(`We have a winner! ${winner} has won the game`);
+}
+
+function draw() {
+  //console.log(board.every((position) => position == "O" || position == "X"));
+  if (board.every((position) => position == "O" || position == "X")) {
+    winner = "Everyone has lost";
+    console.log("The game is a draw");
+  }
 }
 
 function gamePlay() {
@@ -58,5 +78,6 @@ function gamePlay() {
     if (playerMove === "EXIT") return;
     playMaker(playerMove);
     winnerWinnerChickenDinner();
+    draw();
   }
 }
